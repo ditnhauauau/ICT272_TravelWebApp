@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Travel Booking System 🌍</h1>
+        <p class="lead">Find and book amazing tours with trusted agencies.</p>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="~/images/tours.jpg" class="card-img-top" alt="Tours">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Tours</h5>
+                    <p class="card-text">Explore available travel packages, prices, and details.</p>
+                    <a asp-controller="TourPackages" asp-action="Index" class="btn btn-primary">View Tours</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="~/images/agency.jpg" class="card-img-top" alt="Agency">
+                <div class="card-body">
+                    <h5 class="card-title">For Agencies</h5>
+                    <p class="card-text">Create and manage your travel packages easily.</p>
+                    <a asp-controller="TourPackages" asp-action="Create" class="btn btn-success">Add Package</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="~/images/feedback.jpg" class="card-img-top" alt="Feedback">
+                <div class="card-body">
+                    <h5 class="card-title">Tourist Feedback</h5>
+                    <p class="card-text">See what other tourists say about their experiences.</p>
+                    <a asp-controller="Feedbacks" asp-action="Index" class="btn btn-info">View Feedback</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
