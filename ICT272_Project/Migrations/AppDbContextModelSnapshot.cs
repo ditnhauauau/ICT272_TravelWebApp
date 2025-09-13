@@ -22,6 +22,42 @@ namespace ICT272_Project.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ICT272_Project.Models.Booking", b =>
+                {
+                    b.Property<int>("BookingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingID"));
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("TourDateID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TouristID")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingID");
+
+                    b.HasIndex("TourDateID");
+
+                    b.HasIndex("TouristID");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("ICT272_Project.Models.Feedback", b =>
                 {
                     b.Property<int>("FeedbackID")
@@ -47,7 +83,70 @@ namespace ICT272_Project.Migrations
 
                     b.HasKey("FeedbackID");
 
+                    b.HasIndex("BookingID");
+
                     b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TourDate", b =>
+                {
+                    b.Property<int>("TourDateID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TourDateID"));
+
+                    b.Property<DateTime>("AvailableDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PackageID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("TourDateID");
+
+                    b.HasIndex("PackageID");
+
+                    b.ToTable("TourDates");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TourPackage", b =>
+                {
+                    b.Property<int>("PackageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackageID"));
+
+                    b.Property<string>("AgencyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxGroupSize")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("PackageID");
+
+                    b.ToTable("TourPackages");
                 });
 
             modelBuilder.Entity("ICT272_Project.Models.Tourist", b =>
@@ -80,6 +179,110 @@ namespace ICT272_Project.Migrations
                     b.HasKey("TouristID");
 
                     b.ToTable("Tourists");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TravelAgency", b =>
+                {
+                    b.Property<int>("AgencyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AgencyID"));
+
+                    b.Property<string>("AgencyName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ContactInfo")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServicesOffered")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("TourPackagePackageID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AgencyID");
+
+                    b.HasIndex("TourPackagePackageID");
+
+                    b.ToTable("TravelAgencies");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.Booking", b =>
+                {
+                    b.HasOne("ICT272_Project.Models.TourDate", "TourDate")
+                        .WithMany("Bookings")
+                        .HasForeignKey("TourDateID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ICT272_Project.Models.Tourist", "Tourist")
+                        .WithMany()
+                        .HasForeignKey("TouristID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TourDate");
+
+                    b.Navigation("Tourist");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.Feedback", b =>
+                {
+                    b.HasOne("ICT272_Project.Models.Booking", null)
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("BookingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TourDate", b =>
+                {
+                    b.HasOne("ICT272_Project.Models.TourPackage", "TourPackage")
+                        .WithMany("TourDates")
+                        .HasForeignKey("PackageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TourPackage");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TravelAgency", b =>
+                {
+                    b.HasOne("ICT272_Project.Models.TourPackage", null)
+                        .WithMany("TravelAgency")
+                        .HasForeignKey("TourPackagePackageID");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.Booking", b =>
+                {
+                    b.Navigation("Feedbacks");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TourDate", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("ICT272_Project.Models.TourPackage", b =>
+                {
+                    b.Navigation("TourDates");
+
+                    b.Navigation("TravelAgency");
                 });
 #pragma warning restore 612, 618
         }

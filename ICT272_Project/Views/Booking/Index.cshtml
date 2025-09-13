@@ -1,0 +1,162 @@
+﻿@model IEnumerable<Booking>
+
+@{
+    ViewData["Title"] = "Booking Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header gradient-bg border-0 py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0 text-white">
+                            <i class="fas fa-calendar-check me-2"></i>Booking Management
+                        </h2>
+                        <a asp-action="Create" class="btn btn-light btn-sm">
+                            <i class="fas fa-plus me-2"></i>New Booking
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.BookingID)
+                                        </th>
+                                        <th>
+                                            Tourist
+                                        </th>
+                                        <th>
+                                            Tour Package
+                                        </th>
+                                        <th>
+                                            Available Date
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.BookingDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PaymentStatus)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                #@Html.DisplayFor(modelItem => item.BookingID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tourist.FullName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TourDate.TourPackage.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TourDate.AvailableDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.BookingDate)
+                                            </td>
+                                            <td>
+                                                @{
+                                                    string statusClass = item.Status switch
+                                                    {
+                                                        "Confirmed" => "bg-success",
+                                                        "Pending" => "bg-warning",
+                                                        "Cancelled" => "bg-danger",
+                                                        _ => "bg-secondary"
+                                                    };
+                                                }
+                                                <span class="badge @statusClass status-badge">
+                                                    @Html.DisplayFor(modelItem => item.Status)
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @{
+                                                    string paymentClass = item.PaymentStatus switch
+                                                    {
+                                                        "Paid" => "bg-success",
+                                                        "Partial" => "bg-warning",
+                                                        "Unpaid" => "bg-danger",
+                                                        _ => "bg-secondary"
+                                                    };
+                                                }
+                                                <span class="badge @paymentClass status-badge">
+                                                    @Html.DisplayFor(modelItem => item.PaymentStatus)
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a asp-action="Details" asp-route-id="@item.BookingID"
+                                                       class="btn btn-outline-info" title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a asp-action="Edit" asp-route-id="@item.BookingID"
+                                                       class="btn btn-outline-primary" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@item.BookingID"
+                                                       class="btn btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No bookings found</h5>
+                            <p class="text-muted">Get started by creating a new booking.</p>
+                            <a asp-action="Create" class="btn btn-primary">
+                                <i class="fas fa-plus me-2"></i>Create New Booking
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .status-badge {
+        font-size: 0.8em;
+        padding: 0.4em 0.8em;
+        border-radius: 20px;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+</style>

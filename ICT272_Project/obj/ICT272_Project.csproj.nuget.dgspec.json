@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ngtru\\source\\repos\\ICT272_Project\\ICT272_Project\\ICT272_Project.csproj": {}
+    "C:\\Users\\Phuong\\Desktop\\ICT272_TravelWebApp (1)\\ICT272_TravelWebApp\\ICT272_Project\\ICT272_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ngtru\\source\\repos\\ICT272_Project\\ICT272_Project\\ICT272_Project.csproj": {
+    "C:\\Users\\Phuong\\Desktop\\ICT272_TravelWebApp (1)\\ICT272_TravelWebApp\\ICT272_Project\\ICT272_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ngtru\\source\\repos\\ICT272_Project\\ICT272_Project\\ICT272_Project.csproj",
+        "projectUniqueName": "C:\\Users\\Phuong\\Desktop\\ICT272_TravelWebApp (1)\\ICT272_TravelWebApp\\ICT272_Project\\ICT272_Project.csproj",
         "projectName": "ICT272_Project",
-        "projectPath": "C:\\Users\\ngtru\\source\\repos\\ICT272_Project\\ICT272_Project\\ICT272_Project.csproj",
-        "packagesPath": "C:\\Users\\ngtru\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ngtru\\source\\repos\\ICT272_Project\\ICT272_Project\\obj\\",
+        "projectPath": "C:\\Users\\Phuong\\Desktop\\ICT272_TravelWebApp (1)\\ICT272_TravelWebApp\\ICT272_Project\\ICT272_Project.csproj",
+        "packagesPath": "C:\\Users\\Phuong\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Phuong\\Desktop\\ICT272_TravelWebApp (1)\\ICT272_TravelWebApp\\ICT272_Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ngtru\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Phuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

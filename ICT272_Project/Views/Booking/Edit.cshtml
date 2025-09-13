@@ -1,0 +1,104 @@
+﻿@model Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header gradient-bg border-0 py-3">
+                    <h3 class="mb-0 text-white">
+                        <i class="fas fa-edit me-2"></i>Edit Booking #@Model.BookingID
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        @Html.HiddenFor(model => model.BookingID)
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TouristID" class="form-label">Tourist</label>
+                                <select asp-for="TouristID" class="form-select" asp-items="ViewBag.TouristID">
+                                    <option value="">-- Select a tourist --</option>
+                                </select>
+                                <span asp-validation-for="TouristID" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TourDateID" class="form-label">Tour Date</label>
+                                <select asp-for="TourDateID" class="form-select" asp-items="ViewBag.TourDateID">
+                                    <option value="">-- Select a tour date --</option>
+                                </select>
+                                <span asp-validation-for="TourDateID" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="BookingDate" class="form-label">Booking Date</label>
+                                <input asp-for="BookingDate" class="form-control" type="date" />
+                                <span asp-validation-for="BookingDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Status" class="form-label">Status</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PaymentStatus" class="form-label">Payment Status</label>
+                                <select asp-for="PaymentStatus" class="form-select">
+                                    <option value="Unpaid">Unpaid</option>
+                                    <option value="Paid">Paid</option>
+                                    <option value="Partial">Partial</option>
+                                </select>
+                                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> Changes to booking status and payment status may affect tour availability and customer notifications.
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Save Changes
+                            </button>
+                            <a asp-action="Details" asp-route-id="@Model.BookingID" class="btn btn-info">
+                                <i class="fas fa-eye me-2"></i>View Details
+                            </a>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

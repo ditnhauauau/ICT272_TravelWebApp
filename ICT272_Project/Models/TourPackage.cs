@@ -22,5 +22,6 @@ namespace ICT272_Project.Models
         public int MaxGroupSize { get; set; }
 
         public ICollection<TravelAgency> TravelAgency { get; set; }
+        public ICollection<TourDate> TourDates { get; set; } = new List<TourDate>();
     }
 }
